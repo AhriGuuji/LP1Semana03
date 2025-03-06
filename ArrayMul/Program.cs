@@ -10,46 +10,25 @@ namespace ArrayMul
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
 
             float[,] A = new float [2,2];
-            float[,] B = new float [2,1];
-            
-            int i = 0;
-            int j = 0;
+            float[] B = new float [2];
 
-            for (int k = 0; k < 4; k++)
+            A[0,0] = float.Parse(args[0]);
+            A[0,1] = float.Parse(args[1]);
+            A[1,0] = float.Parse(args[2]);
+            A[1,1] = float.Parse(args[3]);
+
+            B[0] = float.Parse(args[4]);
+            B[1] = float.Parse(args[5]);
+
+            for (int i = 0; i < 2; i++)
             {
-                float eachArgs = float.Parse(args[k]);
-                A[j,i] = eachArgs;
-                i++;
-                if (i == 2)
+                float result = 0;
+                for (int j = 0; j < 2; j++)
                 {
-                    i=0;
-                    j=1;
+                    result += A[i,j]*B[j];
                 }
-            }
-
-            i = 0;
-            j = 0;
-
-            for (int k = 4; k < 6; k++)
-            {
-                float eachArgs = float.Parse(args[k]);
-                B[j,i] = eachArgs;
-                i++;
-                if (i == 1)
-                {
-                    i=0;
-                    j=1;
-                }
-            }
-
-            foreach (float a in A)
-            {
-                Console.WriteLine(a);
-            }
-            foreach (float a in B)
-            {
-                Console.WriteLine(a);
-            }
+                Console.WriteLine($"| {result,7:f2} |");
+            }  
         }
     }
 }
