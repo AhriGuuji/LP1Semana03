@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Tracing;
 using System.Reflection.Metadata.Ecma335;
 
 namespace TrapAnalyzer
@@ -27,11 +28,13 @@ namespace TrapAnalyzer
         private static PlayerGear ParseGear(string[] args)
         {
             PlayerGear gear = PlayerGear.None;
+            args[0] = "None";
             foreach (string a in args)
             {
                 if (Enum.Parse<PlayerGear>(a) == PlayerGear.Boots) gear |= PlayerGear.Boots;
-                else if (Enum.Parse<PlayerGear>(a) == PlayerGear.Shield) gear |= PlayerGear.Shield;
-                else if (Enum.Parse<PlayerGear>(a) == PlayerGear.Helmet) gear |= PlayerGear.Helmet;
+                if (Enum.Parse<PlayerGear>(a) == PlayerGear.Shield) gear |= PlayerGear.Shield;
+                if (Enum.Parse<PlayerGear>(a) == PlayerGear.Helmet) gear |= PlayerGear.Helmet;
+                if (Enum.Parse<PlayerGear>(a) == PlayerGear.None) gear |= PlayerGear.None;
             }
             return gear;
         }
