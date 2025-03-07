@@ -18,10 +18,11 @@ namespace HeroPerk
                     case 'w': //if char is w
                         count[0]++;
                         break;
-                    case 'a': //if char is a
+                    case 's': //if char is a
                         count[1]++;
+
                         break;
-                    case 's': //if char is s
+                    case 'a': //if char is s
                         count[2]++;
                         break;
                     case 'd': //if char is d
@@ -37,8 +38,8 @@ namespace HeroPerk
 
             //it will check if the number of each char is divisible by 2. If not, it will add the right perk to player
             if (count[0] % 2 != 0) player |= Perks.WarpShift;
-            if (count[1] % 2 != 0) player |= Perks.AutoHeal;
-            if (count[2] % 2 != 0) player |= Perks.Stealth;
+            if (count[1] % 2 != 0) player |= Perks.Stealth;
+            if (count[2] % 2 != 0) player |= Perks.AutoHeal;
             if (count[3] % 2 != 0) player |= Perks.DoubleJump;
             //if the player has a perk, it will print what perk does it have
             if (player != 0) Console.WriteLine($"Player Perks: {player}");
@@ -55,8 +56,8 @@ namespace HeroPerk
     enum Perks
     {
         WarpShift = 1 << 0,
-        AutoHeal = 1 << 1,
-        Stealth = 1 << 2,
+        Stealth = 1 << 1,
+        AutoHeal = 1 << 2,
         DoubleJump = 1 << 3
     }
 }
