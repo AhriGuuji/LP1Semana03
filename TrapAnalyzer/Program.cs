@@ -30,8 +30,9 @@ namespace TrapAnalyzer
             foreach (string a in args)
             {
                 if (Enum.Parse<PlayerGear>(a) == PlayerGear.Boots) gear |= PlayerGear.Boots;
-                if (Enum.Parse<PlayerGear>(a) == PlayerGear.Shield) gear |= PlayerGear.Shield;
-                if (Enum.Parse<PlayerGear>(a) == PlayerGear.Helmet) gear |= PlayerGear.Helmet;
+                else if (Enum.Parse<PlayerGear>(a) == PlayerGear.Shield) gear |= PlayerGear.Shield;
+                else if (Enum.Parse<PlayerGear>(a) == PlayerGear.Helmet) gear |= PlayerGear.Helmet;
+                else gear |= PlayerGear.None;
             }
             
         }
@@ -44,11 +45,11 @@ namespace TrapAnalyzer
         /// <returns>Wether the player survived the trap or not.</returns>
         private static bool CanSurviveTrap(TrapType trap, PlayerGear gear)
         {
-            if (trap == TrapType.PoisonGas && gear == PlayerGear.Helmet) return true;
-            if (trap == TrapType.PoisonGas && gear == PlayerGear.Shield) return true;
-            if (trap == TrapType.LavaPit && gear == PlayerGear.Boots) return true;
-            if (trap == TrapType.FallingRocks && gear == PlayerGear.Helmet) return true;
-            if (trap == TrapType.SpinningBlades && gear == PlayerGear.Shield) return true;
+            if (trap == TrapType.PoisonGas && gear == (PlayerGear.Helmet|PlayerGear.Shield)) return true;
+            else if (trap == TrapType.LavaPit && gear == PlayerGear.Boots) return true;
+            else if (trap == TrapType.FallingRocks && gear == PlayerGear.Helmet) return true;
+            else if (trap == TrapType.SpinningBlades && gear == PlayerGear.Shield) return true;
+            else return false;
         }
 
         /// <summary>
@@ -57,7 +58,8 @@ namespace TrapAnalyzer
         /// <param name="trap">The trap the player has fallen into.</param>
         private static void DisplayResult(TrapType trap, bool survives)
         {
-            Console.WriteLine($"{survives} {trap}");
+            if (survives == true) Console.WriteLine($"Player survives {trap}");
+            if (survives == false) Console.WriteLine($"Player dies due to {trap}");
         }
     }
 }
